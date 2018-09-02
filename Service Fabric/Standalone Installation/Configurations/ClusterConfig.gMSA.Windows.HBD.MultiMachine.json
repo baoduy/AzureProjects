@@ -1,0 +1,99 @@
+{
+  "name": "SampleCluster",
+  "clusterConfigurationVersion": "1.0.0",
+  "apiVersion": "10-2017",
+  "nodes": [
+    {
+      "nodeName": "sf1",
+      "iPAddress": "sf1.hbd.net",
+      "nodeTypeRef": "NodeType0",
+      "faultDomain": "fd:/dc1/r0",
+      "upgradeDomain": "UD0"
+    },
+    {
+      "nodeName": "sf2",
+      "iPAddress": "sf2.hbd.net",
+      "nodeTypeRef": "NodeType0",
+      "faultDomain": "fd:/dc1/r1",
+      "upgradeDomain": "UD1"
+    },
+    {
+      "nodeName": "sf3",
+      "iPAddress": "sf3.hbd.net",
+      "nodeTypeRef": "NodeType0",
+      "faultDomain": "fd:/dc1/r2",
+      "upgradeDomain": "UD2"
+    }
+  ],
+  "properties": {
+    "diagnosticsStore": {
+      "metadata": "Please replace the diagnostics file share with an actual file share accessible from all cluster machines. For example, \\\\machine1\\DiagnosticsStore.",
+      "dataDeletionAgeInDays": "21",
+      "storeType": "FileShare",
+      "connectionstring": "\\\\AD\\SF_DiagnosticsStore"
+    },
+    "security": {
+      "ClusterCredentialType": "Windows",
+      "ServerCredentialType": "Windows",
+      "WindowsIdentities": {
+        "ClustergMSAIdentity": "hbd.net\\gmSF",
+        "ClusterSPN": "http/sf.hbd.net",
+        "ClientIdentities": [
+          {
+            "Identity": "hbd.net\\SFAdmin",
+            "IsAdmin": true
+          },
+          {
+            "Identity": "hbd.net\\SFAdminGroup",
+            "IsAdmin": true
+          },
+          {
+            "Identity": "hbd.net\\SFUsersGroup",
+            "IsAdmin": false
+          }
+        ]
+      },
+      "CertificateInformation": {
+        "ReverseProxyCertificateCommonNames": {
+          "CommonNames": [
+            {
+              "CertificateCommonName": "sf.hbd.net"
+            }
+          ],
+          "X509StoreName": "My"
+        }
+      }
+    },
+    "nodeTypes": [
+      {
+        "name": "NodeType0",
+        "clientConnectionEndpointPort": "19000",
+        "clusterConnectionEndpointPort": "19001",
+        "leaseDriverEndpointPort": "19002",
+        "serviceConnectionEndpointPort": "19003",
+        "httpGatewayEndpointPort": "19080",
+        "reverseProxyEndpointPort": "19081",
+        "applicationPorts": {
+          "startPort": "20001",
+          "endPort": "20031"
+        },
+        "isPrimary": true
+      }
+    ],
+    "fabricSettings": [
+      {
+        "name": "Setup",
+        "parameters": [
+          {
+            "name": "FabricDataRoot",
+            "value": "C:\\ProgramData\\SF"
+          },
+          {
+            "name": "FabricLogRoot",
+            "value": "C:\\ProgramData\\SF\\Log"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+.\SetCertAccessToServiceAccount.ps1 -pfxThumbPrint f985db7f6bcef3eb6f44937af4c9258ce3a27f6b -serviceAccount "NETWORK SERVICE"
+.\SetCertAccessToServiceAccount.ps1 -pfxThumbPrint da3b4e70e243838cf69f69ad2e5dd323f4e73010 -serviceAccount "NETWORK SERVICE"
+.\SetCertAccessToServiceAccount.ps1 -pfxThumbPrint 7d652e5a8c22cbc5f00a37f3b139d249a3cdf323 -serviceAccount "NETWORK SERVICE"
+.\SetCertAccessToServiceAccount.ps1 -pfxThumbPrint 0bc1d611772314c2ca4b40563ec1eafd44c119fd -serviceAccount "NETWORK SERVICE"
+.\SetCertAccessToServiceAccount.ps1 -pfxThumbPrint 21ce44e7495cee569b11f58827e3b823b9297ff7 -serviceAccount "NETWORK SERVICE"
+
+Remove Cluster
+.\RemoveServiceFabricCluster -ClusterConfigFilePath ./ClusterConfig.X509.HBD.MultiMachine.json -DeleteLog -Force
+.\RemoveServiceFabricCluster -ClusterConfigFilePath ./ClusterConfig.X509.HBD.OneNode.json -DeleteLog -Force
+.\RemoveServiceFabricCluster -ClusterConfigFilePath ./ClusterConfig.Unsecure.HBD.MultiMachine.json -DeleteLog -Force
+.\RemoveServiceFabricCluster -ClusterConfigFilePath ./ClusterConfig.gMSA.Windows.HBD.MultiMachine.json -DeleteLog -Force
+
+
+Multi Certs Node
+.\TestConfiguration.ps1 -ClusterConfigFilePath ./ClusterConfig.X509.HBD.MultiMachine.json -FabricRuntimePackagePath ./MicrosoftAzureServiceFabric.6.3.162.9494.cab
+.\CreateServiceFabricCluster.ps1 -ClusterConfigFilePath ./ClusterConfig.X509.HBD.MultiMachine.json -FabricRuntimePackagePath ./MicrosoftAzureServiceFabric.6.3.162.9494.cab -AcceptEULA
+
+Multi Window Node
+.\TestConfiguration.ps1 -ClusterConfigFilePath ./ClusterConfig.gMSA.Windows.HBD.MultiMachine.json -FabricRuntimePackagePath ./MicrosoftAzureServiceFabric.6.3.162.9494.cab
+.\CreateServiceFabricCluster.ps1 -ClusterConfigFilePath ./ClusterConfig.gMSA.Windows.HBD.MultiMachine.json -FabricRuntimePackagePath ./MicrosoftAzureServiceFabric.6.3.162.9494.cab -AcceptEULA
+
+One Certs Node
+.\TestConfiguration.ps1 -ClusterConfigFilePath ./ClusterConfig.X509.HBD.OneNode.json -FabricRuntimePackagePath ./MicrosoftAzureServiceFabric.6.3.162.9494.cab
+.\CreateServiceFabricCluster.ps1 -ClusterConfigFilePath ./ClusterConfig.X509.HBD.OneNode.json -FabricRuntimePackagePath ./MicrosoftAzureServiceFabric.6.3.162.9494.cab -AcceptEULA
+
+Multi Unsecure Node
+.\TestConfiguration.ps1 -ClusterConfigFilePath ./ClusterConfig.Unsecure.MultiMachine.json -FabricRuntimePackagePath ./MicrosoftAzureServiceFabric.6.3.162.9494.cab
+.\CreateServiceFabricCluster.ps1 -ClusterConfigFilePath ./ClusterConfig.Unsecure.MultiMachine.json -FabricRuntimePackagePath ./MicrosoftAzureServiceFabric.6.3.162.9494.cab -AcceptEULA
+
+
+.\AddNode.ps1 -NodeName vm1 -NodeType NodeType0 -NodeIpAddressOrFQDN sf3.hbd.net -ExistingClientConnectionEndpoint true -UpgradeDomain UD1 -FaultDomain "fd:/dc1/r0" -AcceptEULA -FabricRuntimePackagePath ./MicrosoftAzureServiceFabric.6.3.162.9494.cab -X509Credential false -ServerCertThumbprint ""
+C:\ProgramData

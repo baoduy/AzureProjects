@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Duy Hoang</Authors>
+    <Company>HBD</Company>
+    <Description>The helper classes for Service Fabric.</Description>
+    <Copyright>@2018</Copyright>
+    <RepositoryType>github</RepositoryType>
+    <PackageTags>Service Fabric, Azure, Kestrel</PackageTags>
+    <PackageReleaseNotes>Version 0.0.1
+    The first version of HBD.Service Fabric: Support loading</PackageReleaseNotes>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/baoduy/AzureProjects</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/baoduy/Images/master/NugetLogo.PNG</PackageIconUrl>
+    <RepositoryUrl>https://github.com/baoduy/AzureProjects</RepositoryUrl>
+    <Version>0.0.1</Version>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Https" Version="2.1.1" />
+  </ItemGroup>
+
+</Project>

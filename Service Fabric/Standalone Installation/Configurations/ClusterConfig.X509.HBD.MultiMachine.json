@@ -1,0 +1,171 @@
+{
+  "name": "SfCluster",
+  "clusterConfigurationVersion": "1.0.0",
+  "apiVersion": "10-2017",
+  "nodes": [
+    {
+      "nodeName": "ss1",
+      "iPAddress": "ss1.hbd.net",
+      "nodeTypeRef": "NodeType0",
+      "faultDomain": "fd:/dc1/r0",
+      "upgradeDomain": "UD0"
+    },
+    {
+      "nodeName": "ss2",
+      "iPAddress": "ss2.hbd.net",
+      "nodeTypeRef": "NodeType0",
+      "faultDomain": "fd:/dc1/r1",
+      "upgradeDomain": "UD1"
+    },
+    {
+      "nodeName": "ss3",
+      "iPAddress": "ss3.hbd.net",
+      "nodeTypeRef": "NodeType0",
+      "faultDomain": "fd:/dc1/r2",
+      "upgradeDomain": "UD2"
+    }
+  ],
+  "properties": {
+    "diagnosticsStore": {
+      "metadata": "Please replace the diagnostics file share with an actual file share accessible from all cluster machines. For example, \\\\machine1\\DiagnosticsStore.",
+      "dataDeletionAgeInDays": "21",
+      "storeType": "FileShare",
+      "connectionstring": "\\\\AD\\SF_DiagnosticsStore"
+    },
+    "security": {
+      "metadata": "The Credential type X509 indicates this is cluster is secured using X509 Certificates. The thumbprint format is - d5 ec 42 3b 79 cb e5 07 fd 83 59 3c 56 b9 d5 31 24 25 42 64.",
+      "ClusterCredentialType": "X509",
+      "ServerCredentialType": "X509",
+      "CertificateInformation": {
+        //   "ClusterCertificate": {
+        //     "Thumbprint": "21 ce 44 e7 49 5c ee 56 9b 11 f5 88 27 e3 b8 23 b9 29 7f f7",
+        //     "ThumbprintSecondary": "38 22 69 8e 91 90 a2 27 7e 20 21 02 ad 5d 8f 16 e4 dd 5a 7a",
+        //     "X509StoreName": "My"
+        //   },
+        "ClusterCertificateCommonNames": {
+          "CommonNames": [
+            {
+              "CertificateCommonName": "sf.hbd.net",
+              "CertificateIssuerThumbprint": "b7 20 61 e5 73 00 43 49 89 f1 36 50 14 09 6f 09 6c 48 2d b9"
+            }
+          ],
+          "X509StoreName": "My"
+        },
+        //   "ClusterCertificateIssuerStores": [
+        //     {
+        //       "IssuerCommonName": "hbd-AD-CA",
+        //       "X509StoreNames": "Root"
+        //     }
+        //   ],
+        //   "ServerCertificate": {
+        //     "Thumbprint": "21 ce 44 e7 49 5c ee 56 9b 11 f5 88 27 e3 b8 23 b9 29 7f f7",
+        //     "ThumbprintSecondary": "38 22 69 8e 91 90 a2 27 7e 20 21 02 ad 5d 8f 16 e4 dd 5a 7a",
+        //     "X509StoreName": "My"
+        //   },
+        "ServerCertificateCommonNames": {
+          "CommonNames": [
+            {
+              "CertificateCommonName": "sf.hbd.net",
+              "CertificateIssuerThumbprint": "b7 20 61 e5 73 00 43 49 89 f1 36 50 14 09 6f 09 6c 48 2d b9"
+            }
+          ],
+          "X509StoreName": "My"
+        },
+        //   "ServerCertificateIssuerStores": [
+        //     {
+        //       "IssuerCommonName": "hbd-AD-CA",
+        //       "X509StoreNames": "Root"
+        //     }
+        //   ],
+        //   "ClientCertificateThumbprints": [
+        //     {
+        //       "CertificateThumbprint": "5c c9 d0 66 ef 9c 89 52 85 8b 35 b1 f9 6c 77 66 a8 5d 01 3c",
+        //       "IsAdmin": false
+        //     },
+        //     {
+        //       "CertificateThumbprint": "38 22 69 8e 91 90 a2 27 7e 20 21 02 ad 5d 8f 16 e4 dd 5a 7a",
+        //       "IsAdmin": true
+        //     }
+        //   ],
+        "ClientCertificateCommonNames": [
+          {
+            "CertificateCommonName": "sfclientadmin.hbd.net",
+            "CertificateIssuerThumbprint": "b7 20 61 e5 73 00 43 49 89 f1 36 50 14 09 6f 09 6c 48 2d b9",
+            "IsAdmin": true
+          },
+          {
+            "CertificateCommonName": "sfclient.hbd.net",
+            "CertificateIssuerThumbprint": "b7 20 61 e5 73 00 43 49 89 f1 36 50 14 09 6f 09 6c 48 2d b9",
+            "IsAdmin": false
+          }
+        ],
+        //   "ClientCertificateIssuerStores": [
+        //     {
+        //       "IssuerCommonName": "hbd-AD-CA",
+        //       "X509StoreNames": "Root"
+        //     }
+        //   ],
+        //   "ReverseProxyCertificate": {
+        //     "Thumbprint": "21 ce 44 e7 49 5c ee 56 9b 11 f5 88 27 e3 b8 23 b9 29 7f f7",
+        //     "X509StoreName": "My"
+        //   },
+        "ReverseProxyCertificateCommonNames": {
+          "CommonNames": [
+            {
+              "CertificateCommonName": "sf.hbd.net"
+            }
+          ],
+          "X509StoreName": "My"
+        }
+      }
+    },
+    "nodeTypes": [
+      {
+        "name": "NodeType0",
+        "clientConnectionEndpointPort": "19000",
+        "clusterConnectionEndpointPort": "19001",
+        "leaseDriverEndpointPort": "19002",
+        "serviceConnectionEndpointPort": "19003",
+        "httpGatewayEndpointPort": "19080",
+        "reverseProxyEndpointPort": "19081",
+        "applicationPorts": {
+          "startPort": "20001",
+          "endPort": "30031"
+        },
+        "ephemeralPorts": {
+          "startPort": "30032",
+          "endPort": "50062"
+        },
+        "isPrimary": true
+      }
+    ],
+    "fabricSettings": [
+      {
+        "name": "Setup",
+        "parameters": [
+          {
+            "name": "FabricDataRoot",
+            "value": "C:\\ProgramData\\SF"
+          },
+          {
+            "name": "FabricLogRoot",
+            "value": "C:\\ProgramData\\SF\\Log"
+          }
+        ]
+      },
+      {
+        "name": "ApplicationGateway/Http",
+        "parameters": [
+          {
+            "name": "SecureOnlyMode",
+            "value": false
+          },
+          {
+            "name": "IsEnabled",
+            "value": true
+          }
+        ]
+      }
+    ]
+  }
+}
